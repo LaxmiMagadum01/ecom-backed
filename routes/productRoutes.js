@@ -1,16 +1,23 @@
-const exress = require("express");
+const express = require("express");
 const {
   createProduct,
-  getALLProducts,
+  getAllProducts,
   getProductById,
   updateProduct,
   deleteProduct,
-} = require("../controllers/productcontroller");
+} = require("../controllers/productController");
+const validateProduct = require("../utils/validateProduct");
 
 const productRoutes = express.Router();
-productRoutes.post("/", createProduct);
-productRoutes.get("/", getALLProducts);
+
+productRoutes.post("/", validateProduct, createProduct);
+
+productRoutes.get("/", getAllProducts);
+
 productRoutes.get("/:id", getProductById);
-productRoutes.put("/:id", updateProduct);
+
+productRoutes.put("/:id", validateProduct, updateProduct);
+
 productRoutes.delete("/:id", deleteProduct);
+
 module.exports = productRoutes;

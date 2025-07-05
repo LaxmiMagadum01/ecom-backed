@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cookieparser = require("cooki-parser");
 const productRoutes = require("./routes/productRoutes");
+const cartRoutes = require("./routes/cartRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 dotenv.config();
 
@@ -15,6 +17,8 @@ app.get("/", (req, res) => {
   });
 });
 app.use("/products", productRoutes);
+app.use("/auth", authRoutes);
+app.use("/cart", cartRoutes);
 mongoose
   .connect(process.env.MONGO_URL)
   .then(() => {
